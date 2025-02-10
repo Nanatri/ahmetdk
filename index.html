@@ -8,7 +8,6 @@
   <link rel="shortcut icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Love_Heart_symbol.svg/394px-Love_Heart_symbol.svg.png" type="image/x-icon">
 
   <style>
-    /* Genel Sayfa Stilleri */
     * {
       box-sizing: border-box;
     }
@@ -19,6 +18,7 @@
       overflow: hidden;
       height: 100vh;
       background-color: #000;
+      position: relative;
     }
 
     /* Arka Plan Video */
@@ -32,6 +32,32 @@
       z-index: -2;
     }
 
+    /* Kar Efekti */
+    .snowflakes {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .snowflake {
+      position: absolute;
+      color: white;
+      font-size: 24px;
+      opacity: 0.8;
+      pointer-events: none;
+      animation: snow 10s linear infinite;
+    }
+
+    @keyframes snow {
+      to {
+        transform: translateY(100vh);
+      }
+    }
+
     /* Kalp Animasyonu */
     #kalp {
       position: relative;
@@ -43,202 +69,144 @@
 
     #kalp:before,
     #kalp:after {
-      position: absolute;
       content: "";
-      left: 60px;
+      position: absolute;
       top: 0;
-      border-top: 10px #CF2E3B solid;
-      width: 60px;
-      height: 80px;
-      background: #CF2E3B;
-      border-radius: 50px 50px 0 0;
-      transform: rotate(-45deg);
-      transform-origin: 0 100%;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background-color: red;
+      animation: pulse 1.5s ease-out infinite;
+    }
+
+    #kalp:before {
+      left: 50px;
+      animation-delay: -0.5s;
     }
 
     #kalp:after {
       left: 0;
-      transform: rotate(45deg);
-      transform-origin: 100% 100%;
-      box-shadow: 2px 0px 1px #902029;
-    }
-
-    #kalp:before {
-      box-shadow: 2px 2px 1px #3d0e11;
-      border-top: 10px #de6b75 solid;
+      animation-delay: 0s;
     }
 
     @keyframes pulse {
       0% {
-        transform: scale(2);
+        transform: scale(0.9);
       }
-
-      25% {
-        transform: scale(1.8);
-      }
-
       50% {
-        transform: scale(2.1);
+        transform: scale(1.2);
       }
-
-      75% {
-        transform: scale(2);
-      }
-
       100% {
-        transform: scale(2);
+        transform: scale(0.9);
       }
     }
 
-    /* Metin Animasyonları */
-    .seniseviyom {
-      font-family: monospace;
-      font-size: 6.5em;
-      color: #fff;
+    /* Sayfa Başlığı */
+    #title {
+      position: absolute;
+      top: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 3rem;
+      color: white;
       text-align: center;
-      letter-spacing: 2px;
-      font-weight: 700;
-      text-transform: uppercase;
-      animation: blur 1.25s ease-out infinite;
-      text-shadow: 0px 0px 5px #fff, 0px 0px 7px #fff;
-      margin-top: -100px;
-    }
-
-    @keyframes blur {
-      from {
-        text-shadow: 0px 0px 10px #fff, 0px 0px 10px #fff, 0px 0px 25px #fff, 0px 10px 100px #7B96B8, 0px -10px 100px #7B96B8;
-      }
-    }
-
-    /* Kar Tanesi Efekti */
-    #karAlani {
-      position: absolute;
-      width: 100%;
-      min-height: 100%;
-      overflow: hidden;
-      z-index: -1;
-    }
-
-    .fa-snowflake-o {
-      color: #fff;
-      position: absolute;
-      top: -20px;
-      animation: yagis linear forwards;
-    }
-
-    @keyframes yagis {
-      to {
-        transform: translateY(105vh);
-      }
+      font-weight: bold;
     }
 
     /* Mobil Uyumluluk */
-    @media screen and (max-width: 768px) {
-      .seniseviyom {
-        font-size: 5em;
-      }
-
+    @media (max-width: 600px) {
       #kalp {
-        width: 100px;
-        height: 75px;
+        width: 80px;
+        height: 60px;
+      }
+
+      #kalp:before,
+      #kalp:after {
+        width: 70px;
+        height: 70px;
+      }
+
+      #title {
+        font-size: 2rem;
       }
     }
 
-    @media screen and (max-width: 480px) {
-      .seniseviyom {
-        font-size: 4em;
-      }
-
-      #kalp {
-        width: 90px;
-        height: 67px;
-      }
+    /* Müzik Kontrolü */
+    #music-control {
+      position: fixed;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 30px;
+      cursor: pointer;
     }
-
-    /* Sevgi Metni */
-    .SEVGISOZLERI {
-      color: #fff;
-      text-align: center;
-      position: relative;
-      margin: auto;
-      font-size: 1.5em;
-      text-shadow: 0px 0px 5px #fff, 0px 0px 10px #fff;
-    }
-
-    .SevgiDiv {
-      position: relative;
-      margin: auto;
-      text-align: center;
-    }
-
-    #SevgiMetini {
-      color: #fff;
-      text-align: center;
-      position: relative;
-      margin: auto;
-      font-size: 1.8em;
-    }
-
   </style>
-
-  <script>
-    /* Kar Tanesi Efekti */
-    function karTanesi() {
-      var karTanesi = document.createElement('i');
-      var zemin = document.getElementById("karAlani");
-      var body = document.getElementsByTagName("BODY")[0];
-      var bodyYukseklik = body.clientHeight;
-      zemin.style.height = bodyYukseklik + "px";
-      karTanesi.classList.add('fa', 'fa-snowflake-o');
-      karTanesi.style.left = Math.random() * body.clientWidth + 'px';
-      karTanesi.style.opacity = Math.random();
-      karTanesi.style.animationDuration = Math.random() * 3 + 2 + 's';
-      zemin.appendChild(karTanesi);
-      setTimeout(() => { karTanesi.remove(); }, 7000);
-    }
-    setInterval(karTanesi, 80);
-
-    /* Sevgi Metni Değiştirme */
-    const SevgiSozleri = [
-      "Seni Seviyorum", "Aşkımız sonsuz", "Kalbim seninle atıyor", "Gönlümde hep sen varısın",
-      "Birlikte geçirdiğimiz zaman çok değerli", "Gözlerin beni büyülüyor", "Sensiz geçen anlar eksik",
-      "Her anında seni düşünüyorum", "Gülüşün dünyamı aydınlatıyor", "Birlikte olduğumuzda zaman duruyor",
-      "Seninle geçirdiğim her an özel", "Hayatımın anlamı sensin", "Aşkın rengi seninle belli oluyor",
-      "Seninle geçirdiğim her gün bir ömre bedel", "Kalbim senin adınla çarpıyor", "Seninle olmak bir ayrıcalık",
-      "Sana her gün biraz daha aşığım", "Gönlümde sadece senin için yer var", "Aşkınla dolup taşıyorum",
-      "Seninle her anım özel", "Gözlerinle bana hayat veriyorsun", "Aşkınla içimi ısıtıyorsun",
-      "Seninle her an yeni bir başlangıç", "Sensiz bir gün geçmesin istiyorum", "Aşkınla hayat renk buluyor",
-      "Gönlümün tek sahibi sensin", "Seninle geçen her an bir hazine"
-    ];
-
-    const SevgiMetinElemani = document.getElementById("SevgiMetini");
-
-    function mesajiDegistir() {
-      const rastgeleHesapla = Math.floor(Math.random() * SevgiSozleri.length);
-      const rastgeleMesaj = SevgiSozleri[rastgeleHesapla];
-      SevgiMetinElemani.textContent = rastgeleMesaj;
-    }
-
-    setInterval(mesajiDegistir, 3000);
-  </script>
 </head>
 <body>
 
-  <!-- YouTube Video Arka Planı -->
-  <iframe id="background-video" src="https://www.youtube.com/embed/E6lNDqIcbNU?autoplay=1&mute=1&loop=1&playlist=E6lNDqIcbNU"
-    frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  <!-- Arka Plan Videosu -->
+  <video id="background-video" autoplay loop muted>
+    <source src="https://path_to_your_video.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
 
+  <!-- Kar Efekti -->
+  <div class="snowflakes">
+    <div class="snowflake" style="left: 10%; animation-duration: 10s;"></div>
+    <div class="snowflake" style="left: 30%; animation-duration: 12s;"></div>
+    <div class="snowflake" style="left: 50%; animation-duration: 14s;"></div>
+    <div class="snowflake" style="left: 70%; animation-duration: 8s;"></div>
+    <div class="snowflake" style="left: 90%; animation-duration: 16s;"></div>
+  </div>
+
+  <!-- Kalp Animasyonu -->
   <div id="kalp"></div>
 
-  <div class="seniseviyom">
-    Seni Seviyorum
-  </div>
+  <!-- Sayfa Başlığı -->
+  <div id="title">Sevgilim ❤️</div>
 
-  <div class="SevgiDiv">
-    <div id="SevgiMetini" class="SEVGISOZLERI">Sana olan sevgim tarif edilemez.</div>
-  </div>
+  <!-- Müzik -->
+  <audio id="background-music" autoplay loop>
+    <source src="https://www.youtube.com/watch?v=E6lNDqIcbNU" type="audio/mp3">
+    Your browser does not support the audio tag.
+  </audio>
 
-  <div id="karAlani"></div>
+  <!-- Müzik Kontrol -->
+  <div id="music-control" onclick="toggleMusic()">Ses Aç/Kapat</div>
+
+  <script>
+    // Müzik Kontrol
+    function toggleMusic() {
+      const music = document.getElementById('background-music');
+      if (music.paused) {
+        music.play();
+      } else {
+        music.pause();
+      }
+    }
+
+    // Kar Efekti Script
+    const snowflakesContainer = document.querySelector('.snowflakes');
+    const snowflakes = ['❄', '❅', '❆'];
+
+    function createSnowflakes() {
+      const snowflake = document.createElement('div');
+      snowflake.classList.add('snowflake');
+      snowflake.textContent = snowflakes[Math.floor(Math.random() * snowflakes.length)];
+      snowflake.style.left = Math.random() * 100 + '%';
+      snowflake.style.animationDuration = Math.random() * 5 + 5 + 's';
+      snowflakesContainer.appendChild(snowflake);
+
+      setTimeout(() => {
+        snowflake.remove();
+      }, 10000);
+    }
+
+    setInterval(createSnowflakes, 100);
+  </script>
 
 </body>
 </html>
