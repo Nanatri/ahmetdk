@@ -1,212 +1,339 @@
 <!DOCTYPE html>
-<html lang="tr" oncontextmenu="return false" onselectstart="return true" ondragstart="return false">
+<html lang="tr">
 <head>
-  <meta charset="utf-8">
-  <meta name="theme-color" content="#330c70" />
+  <meta charset="UTF-8">
+  <!-- Mobil uyum için gerekli meta tag -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title id="SevgiliSiteBaşlığı">❤️</title>
-  <link rel="shortcut icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Love_Heart_symbol.svg/394px-Love_Heart_symbol.svg.png" type="image/x-icon">
-
+  <title>İrem'i sevmek için 26 Sebep</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
+    /* Genel stil ayarları */
     body {
       margin: 0;
+      padding: 0;
       font-family: 'Arial', sans-serif;
-      overflow: hidden;
-      height: 100vh;
-      background-color: #000;
-      position: relative;
-    }
-
-    /* Arka Plan Video */
-    #background-video {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: -2;
-    }
-
-    /* Kar Efekti */
-    .snowflakes {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    .snowflake {
-      position: absolute;
-      color: white;
-      font-size: 24px;
-      opacity: 0.8;
-      pointer-events: none;
-      animation: snow 10s linear infinite;
-    }
-
-    @keyframes snow {
-      to {
-        transform: translateY(100vh);
-      }
-    }
-
-    /* Kalp Animasyonu */
-    #kalp {
-      position: relative;
-      width: 120px;
-      height: 90px;
-      margin: auto;
-      animation: pulse 1.5s ease-out infinite;
-    }
-
-    #kalp:before,
-    #kalp:after {
-      content: "";
-      position: absolute;
-      top: 0;
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      background-color: red;
-      animation: pulse 1.5s ease-out infinite;
-    }
-
-    #kalp:before {
-      left: 50px;
-      animation-delay: -0.5s;
-    }
-
-    #kalp:after {
-      left: 0;
-      animation-delay: 0s;
-    }
-
-    @keyframes pulse {
-      0% {
-        transform: scale(0.9);
-      }
-      50% {
-        transform: scale(1.2);
-      }
-      100% {
-        transform: scale(0.9);
-      }
-    }
-
-    /* Sayfa Başlığı */
-    #title {
-      position: absolute;
-      top: 20%;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 3rem;
-      color: white;
+      background: linear-gradient(135deg, #f78ca0, #f9748f, #fd868c, #fe9a8b);
+      color: #fff;
       text-align: center;
-      font-weight: bold;
+      overflow-x: hidden;
+      position: relative;
     }
-
-    /* Mobil Uyumluluk */
-    @media (max-width: 600px) {
-      #kalp {
-        width: 80px;
-        height: 60px;
-      }
-
-      #kalp:before,
-      #kalp:after {
-        width: 70px;
-        height: 70px;
-      }
-
-      #title {
-        font-size: 2rem;
-      }
+    /* Açılış (landing) sayfası */
+    .landing {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      box-sizing: border-box;
     }
-
-    /* Müzik Kontrolü */
-    #music-control {
-      position: fixed;
-      bottom: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: rgba(0, 0, 0, 0.7);
-      color: white;
-      padding: 10px 20px;
-      border-radius: 30px;
+    .landing h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+    .landing p {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+    }
+    button {
+      background-color: #fff;
+      color: #f9748f;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.1em;
+      border-radius: 10px;
       cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background-color: #f0f0f0;
+    }
+    /* Ana içerik */
+    .container {
+      display: none;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    #counter {
+      font-size: 1.5em;
+      margin: 15px 0;
+    }
+    #reasonDisplay h2 {
+      font-size: 2em;
+      margin-bottom: 5px;
+    }
+    #reasonDisplay h3 {
+      font-size: 1.3em;
+      margin-top: 0;
+      font-weight: normal;
+    }
+    /* Responsive video container (16:9 oranı) */
+    .video-container {
+      position: relative;
+      width: 100%;
+      max-width: 560px;
+      margin: 20px auto;
+      padding-bottom: 56.25%; /* 16:9 oranı */
+      height: 0;
+    }
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 10px;
+    }
+    /* Kalp animasyonu */
+    .heart {
+      position: absolute;
+      color: #ff4081;
+      font-size: 2rem;
+      opacity: 1;
+      animation: rise 2s linear forwards;
+      pointer-events: none;
+    }
+    @keyframes rise {
+      0%   { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-100px) scale(1.5); opacity: 0; }
+    }
+    /* Küçük ekranlarda düzenleme */
+    @media (max-width: 600px) {
+      .landing h1 {
+        font-size: 2em;
+      }
+      .landing p {
+        font-size: 1em;
+      }
+      button {
+        padding: 10px 20px;
+        font-size: 1em;
+      }
+      #counter {
+        font-size: 1.3em;
+      }
+      #reasonDisplay h2 {
+        font-size: 1.5em;
+      }
+      #reasonDisplay h3 {
+        font-size: 1.1em;
+      }
     }
   </style>
 </head>
 <body>
-
-  <!-- Arka Plan Videosu -->
-  <video id="background-video" autoplay loop muted>
-    <source src="https://path_to_your_video.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
-
-  <!-- Kar Efekti -->
-  <div class="snowflakes">
-    <div class="snowflake" style="left: 10%; animation-duration: 10s;"></div>
-    <div class="snowflake" style="left: 30%; animation-duration: 12s;"></div>
-    <div class="snowflake" style="left: 50%; animation-duration: 14s;"></div>
-    <div class="snowflake" style="left: 70%; animation-duration: 8s;"></div>
-    <div class="snowflake" style="left: 90%; animation-duration: 16s;"></div>
+  <!-- Açılış ekranı -->
+  <div class="landing" id="landingPage">
+    <h1>Hoşgeldin Aşkımmm</h1>
+    <p>Senin için hazırladığım ve Seni sevmemin 26 özel sebebi var...</p>
+    <button id="startButton">Başla</button>
   </div>
 
-  <!-- Kalp Animasyonu -->
-  <div id="kalp"></div>
-
-  <!-- Sayfa Başlığı -->
-  <div id="title">Sevgilim ❤️</div>
-
-  <!-- Müzik -->
-  <audio id="background-music" autoplay loop>
-    <source src="https://www.youtube.com/watch?v=E6lNDqIcbNU" type="audio/mp3">
-    Your browser does not support the audio tag.
-  </audio>
-
-  <!-- Müzik Kontrol -->
-  <div id="music-control" onclick="toggleMusic()">Ses Aç/Kapat</div>
+  <!-- Ana içerik -->
+  <div class="container" id="mainContainer">
+    <div id="counter">Sebep 26 / 26</div>
+    <div id="reasonDisplay">
+      <h2 id="reasonText">Seni sevmek için 26 sebep...</h2>
+      <h3 id="songTitle"></h3>
+    </div>
+    <div class="video-container">
+      <iframe id="videoFrame" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <button id="nextButton" onclick="nextReason()">Devam Et</button>
+  </div>
 
   <script>
-    // Müzik Kontrol
-    function toggleMusic() {
-      const music = document.getElementById('background-music');
-      if (music.paused) {
-        music.play();
+    /*  
+      Önemli Not:
+      YouTube Music linklerini embed etmek yerine YouTube'un embed URL'lerini kullanmak daha sağlıklı çalışır.
+      Örneğin: "https://www.youtube.com/embed/VIDEO_ID?autoplay=1"
+    */
+    const playlist = [
+      { 
+        text: "Seni sevmek için sebep: Şans Meleğimsin.",
+        title: "Kenan Doğulu - Şans Meleğim",
+        youtube: "https://www.youtube.com/embed/rmdImaa3tWw"
+      },
+      { 
+        text: "Seni sevmek için sebep: Bal Bademimsin.",
+        title: "Berkay - Bal Badem",
+        youtube: "https://www.youtube.com/embed/fdrW-FC50Ro?si=BK2tYiFMDaM1N831"
+      },
+      { 
+        text: "Seni sevmek için sebep: Aşkın en güzel halini seninle yaşamak istiyorum.",
+        title: "Tarkan - Ikimizin Yerine",
+        youtube: "https://www.youtube.com/embed/-zl_RkfmU8Q"
+      },
+      { 
+        text: "Seni sevmek için sebep: Seninle her şeyin mümkün olduğunu bilmek.",
+        title: "Sezen Aksu - Seni İstiyorum",
+        youtube: "https://www.youtube.com/embed/YH3JP2HymaY"
+      },
+      { 
+        text: "Seni sevmek için sebep: Kuzu kuzu sana olan bitmek bilmeyen sevgim.",
+        title: "Tarkan - Kuzu Kuzu",
+        youtube: "https://www.youtube.com/embed/1TtalpYn0A4?si=lGUQTI3bYQO6Eiav"
+      },
+      { 
+        text: "Seni sevmek için sebep: Dudu gibi büyüleyen enerjin.",
+        title: "Tarkan - Dudu",
+        youtube: "https://www.youtube.com/embed/VIDEO_ID_6"  // Gerçek video ID ile değiştirin.
+      },
+      { 
+        text: "Seni sevmek için sebep: Gülümsemenle dünyam aydınlanıyor.",
+        title: "Sezen Aksu - Gülümse",
+        youtube: "https://www.youtube.com/embed/qgfLk8Uksxo?si=-S55rRQdxB0DQ_pY"
+      },
+      { 
+        text: "Seni sevmek için sebep: Aşkımızın ateşiyle yanıp tutuşmamız.",
+        title: "Ajda Pekkan - Yakar Geçerim",
+        youtube: "https://www.youtube.com/embed/Xpp_y2Os5Co?si=5gVbuuwjjBg8jypt"
+      },
+      { 
+        text: "Seni sevmek için sebep: Seninle kurduğum dünya, en değerli evim.",
+        title: "Ajda Pekkan - O Benim Dünyam",
+        youtube: "https://www.youtube.com/embed/aAPuhE7G58E?si=nT38SVrCayOfa8cX"
+      },
+      { 
+        text: "Seni sevmek için sebep: Aşkın tanrısı gibisin, her şeyin anlamı sensin.",
+        title: "Kenan Doğulu - Aşk Tanrısı",
+        youtube: "https://www.youtube.com/embed/aaheC-yxU24?si=NwrNJXAGovKPit3q"
+      },
+      { 
+        text: "Seni sevmek için sebep: Rengârenk hayatım, seninle güzelleşiyor.",
+        title: "Sertab Erener - Rengârenk",
+        youtube: "https://www.youtube.com/embed/KctSHOFo2ig?si=squCK5w3UUSzk00D"
+      },
+      { 
+        text: "Seni sevmek için sebep: Aşkımız doğal ve olduğu gibi mükemmel.",
+        title: "Sertab Erener - Bu Böyle",
+        youtube: "https://www.youtube.com/embed/YTaknwQM_C8?si=sTfNqFJtJLDDo2Ic"
+      },
+      { 
+        text: "Seni sevmek için sebep: Güzelliğin, ay ışığı kadar büyüleyici.",
+        title: "Mustafa Sandal - Aya Benzer",
+        youtube: "https://www.youtube.com/embed/VlEOPZNTeTc?si=d3Sf3zmboz2HVIUv"
+      },
+      { 
+        text: "Seni sevmek için sebep: İsyankar ruhumun seninle huzur bulması.",
+        title: "Mustafa Sandal - İsyankar",
+        youtube: "https://www.youtube.com/embed/My-VssMH2hc?si=3CsTD2OLBNjt6lIi"
+      },
+      { 
+        text: "Seni sevmek için sebep: Gecelerin sessizliğinde yankılanan aşkımız.",
+        title: "Nilüfer - Geceler",
+        youtube: "https://www.youtube.com/embed/7yfaiSog0wY"
+      },
+      { 
+        text: "Seni sevmek için sebep: Elele her zamannn.",
+        title: "Ozdemir Erdoğan - Bana Ellerini Ver",
+        youtube: "https://www.youtube.com/embed/gRjsXfD6ivo?si=JzIntHl7v88sHsOX"
+      },
+      { 
+        text: "Seni sevmek için sebep: Bana sor, kalbimin derinliklerindeki sevgiyi.",
+        title: "Erol Evgin - Bi’ de Bana Sor",
+        youtube: "https://www.youtube.com/embed/ZtG3eMZL8x8?si=Rj-sTQ0-4b4mC2wS"
+      },
+      { 
+        text: "Seni sevmek için sebep: Romeo ve Juliet kadar destansı bir aşk hikayemiz var.",
+        title: "Hande Yener - Romeo",
+        youtube: "https://www.youtube.com/embed/qiMrO3yBtzk"
+      },
+      { 
+        text: "Seni sevmek için sebep: İçimde yanan aşk ateşini sen körüklüyorsun.",
+        title: "Demet Akalın - Ateş",
+        youtube: "https://www.youtube.com/embed/GO1bhVd1Iy4"
+      },
+      { 
+        text: "Seni sevmek için sebep: Adım adım kalbime dokunman, iz bırakıyor.",
+        title: "Erkan Güleryüz - Asktan Cezali",
+        youtube: "https://www.youtube.com/embed/ZnE18HxZUwU?si=ZeDWNbo86WE1rNGK"
+      },
+      { 
+        text: "Seni sevmek için sebep: Acılar olsa da seni sevmekten asla vazgeçmem.",
+        title: "Sıla - Acısa da Öldürmez",
+        youtube: "https://www.youtube.com/embed/ibh5KJXtRgg?si=5DBAG7Gveb-VGCKC"
+      },
+      { 
+        text: "Seni sevmek için sebep: Kolayca düşülen o derin aşka inancım.",
+        title: "Mabel Matiz - Öyle Kolaysa",
+        youtube: "https://www.youtube.com/embed/Ze9vYI-8VD0"
+      },
+      { 
+        text: "Seni sevmek için sebep: Kalbimi sadece sana sakladım.",
+        title: "Duman - Seni Kendime Sakladım",
+        youtube: "https://www.youtube.com/embed/yoNzzWRye7c?si=Qhj4aPaUbdl-EiVj"
+      },
+      { 
+        text: "Seni sevmek için sebep: Aşkın en saf ve tutkulu hali sensin.",
+        title: "Gripin - Aşk",
+        youtube: "https://www.youtube.com/embed/4sJmiQX33KU?si=w__0KLguizjl4yRA"
+      },
+      { 
+        text: "Seni sevmek için sebep: Hayatımızda belki bir kuş geçer ama aşkımız sonsuz.",
+        title: "Yüksek Sadakat - Belki Üstümüzden Bir Kuş Geçer",
+        youtube: "https://www.youtube.com/embed/heUSEDLf4ic"
+      },
+      { 
+        text: "Seni sevmek için sebep: Samanyolu kadar efsane aşkımız.",
+        title: "Berkant - Samanyolu",
+        youtube: "https://www.youtube.com/embed/6D1l_8qI4ks?si=W0C7U-NLWFh_TZCK"
+      }
+    ];
+
+    // Kullanıcıya geriye doğru (26’dan 1’e) göstermek için:
+    let currentIndex = playlist.length - 1; // Başlangıç: index 25 (26. sebep)
+
+    function nextReason() {
+      if (currentIndex >= 0) {
+        // Güncel sebep ve şarkı bilgisini güncelle
+        document.getElementById("counter").innerText = "Sebep " + (currentIndex + 1) + " / 26";
+        document.getElementById("reasonText").innerText = playlist[currentIndex].text;
+        document.getElementById("songTitle").innerText = playlist[currentIndex].title;
+        // YouTube video embed'ine autoplay parametresi ekleniyor
+        document.getElementById("videoFrame").src = playlist[currentIndex].youtube + "?autoplay=1";
+        createHearts(); // Butona tıklandığında kalpler de oluşturulsun.
+        currentIndex--;
       } else {
-        music.pause();
+        // Tüm sebep ve şarkılar gösterildiyse final mesajı
+        document.getElementById("reasonText").innerText = "Seni ne kadar sevdiğimi anlatmaya şarkılar bile yetmez!";
+        document.getElementById("songTitle").innerText = "";
+        document.getElementById("videoFrame").style.display = "none";
+        document.getElementById("nextButton").style.display = "none";
+        document.getElementById("counter").style.display = "none";
       }
     }
 
-    // Kar Efekti Script
-    const snowflakesContainer = document.querySelector('.snowflakes');
-    const snowflakes = ['❄', '❅', '❆'];
-
-    function createSnowflakes() {
-      const snowflake = document.createElement('div');
-      snowflake.classList.add('snowflake');
-      snowflake.textContent = snowflakes[Math.floor(Math.random() * snowflakes.length)];
-      snowflake.style.left = Math.random() * 100 + '%';
-      snowflake.style.animationDuration = Math.random() * 5 + 5 + 's';
-      snowflakesContainer.appendChild(snowflake);
-
+    // Kalp oluşturma fonksiyonları
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerText = "♥";  // Unicode kalp karakteri
+      // Rastgele yatay konum (viewport genişliğine göre)
+      heart.style.left = Math.random() * 100 + "vw";
+      // Kalp başlangıç yüksekliği (örneğin ekranın alt kısmında)
+      heart.style.top = "80vh";
+      document.body.appendChild(heart);
+      // Animasyon süresinden sonra kalbi kaldır
       setTimeout(() => {
-        snowflake.remove();
-      }, 10000);
+        heart.remove();
+      }, 2000);
     }
 
-    setInterval(createSnowflakes, 100);
-  </script>
+    function createHearts() {
+      // Örneğin 5 kalp oluştur, aralarında kısa gecikmeler
+      for (let i = 0; i < 5; i++) {
+        setTimeout(createHeart, i * 200);
+      }
+    }
 
+    // Başla butonuna tıklandığında açılış ekranını gizleyip ana içerik ekranını göster
+    document.getElementById("startButton").addEventListener("click", function(){
+      document.getElementById("landingPage").style.display = "none";
+      document.getElementById("mainContainer").style.display = "block";
+      nextReason(); // İlk sebebi yükle
+    });
+  </script>
 </body>
 </html>
